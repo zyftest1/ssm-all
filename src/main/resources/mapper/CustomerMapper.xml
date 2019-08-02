@@ -30,27 +30,26 @@
       select
       <include refid="Base_Column_List"></include>
         from customer
-      where cust_id = #{custId,jdbcType=BIGINT}
     </select>
-<!--  <select id="selectByOthers" resultMap="BaseResultMap">-->
-<!--    select-->
-<!--    <include refid="Base_Column_List" />-->
-<!--    from customer-->
-<!--    <where>-->
-<!--      <if test="cust_name != null">-->
-<!--        and cust_name like '%' #{cust_name,jdbcType=VARCHAR} '%'-->
-<!--      </if>-->
-<!--      <if test="cust_source != null">-->
-<!--        and cust_source = #{cust_source,jdbcType=VARCHAR}-->
-<!--      </if>-->
-<!--      <if test="cust_industry != null">-->
-<!--        and cust_industry = #{cust_industry,jdbcType=VARCHAR}-->
-<!--      </if>-->
-<!--      <if test="cust_level != null">-->
-<!--        and cust_level = #{cust_level,jdbcType=VARCHAR}-->
-<!--      </if>-->
-<!--    </where>-->
-<!--  </select>-->
+  <select id="selectByOthers" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from customer
+    <where>
+      <if test= "custName != null">
+        and cust_name like '%' #{custName,jdbcType=VARCHAR} '%'
+      </if>
+      <if test="custSource != null">
+        and cust_source = #{custSource,jdbcType=VARCHAR}
+      </if>
+      <if test="custIndustry != null">
+        and cust_industry = #{custIndustry,jdbcType=VARCHAR}
+      </if>
+      <if test="custLevel != null">
+        and cust_level = #{custLevel,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from customer
     where cust_id = #{custId,jdbcType=BIGINT}

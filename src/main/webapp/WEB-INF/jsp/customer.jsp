@@ -210,13 +210,13 @@
 			<!-- /.row -->
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-inline" action="${pageContext.request.contextPath }/customer/list.action" method="get">
+					<form class="form-inline" action="" method="get" id="selectForm">
 						<div class="form-group">
-							<label for="customerName">客户名称</label> 
+							<label for="customerName">客户名称</label>
 							<input type="text" class="form-control" id="customerName" value="${custName }" name="custName">
 						</div>
 						<div class="form-group">
-							<label for="customerFrom">客户来源</label> 
+							<label for="customerFrom">客户来源</label>
 							<select	class="form-control" id="customerFrom" placeholder="客户来源" name="custSource">
 								<option value="">--请选择--</option>
 								<c:forEach items="${customerSources}" var="item">
@@ -228,7 +228,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="custIndustry">所属行业</label> 
+							<label for="custIndustry">所属行业</label>
 							<select	class="form-control" id="custIndustry"  name="custIndustry">
 								<option value="">--请选择--</option>
 								<c:forEach items="${customerJobs}" var="item">
@@ -247,8 +247,8 @@
 								</c:forEach>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary">查询</button>
-<%--						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerInsertDialog">添加</button>--%>
+						<button type="submit" class="btn btn-primary" onclick="selectCustomerByOthers()">查询</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerInsertDialog">添加</button>
 					</form>
 				</div>
 			</div>
@@ -644,40 +644,7 @@
 				});
 			}
 		}
-
 		function insertCustomer() {
-			// $("#edit_customerFrom").empty();
-			// $("#edit_custIndustry").empty();
-			// $("#edit_custLevel").empty();
-			// $.ajax({
-			// 	type:"get",
-			// 	url:"/customer/cus/"+id,
-			// 	// data:{"id":id},
-			// 	success:function(data) {
-			//
-			// 		var customer = data.customer;
-			// 		var cusForm = data.customerSources;
-			// 		var cusIndustry = data.customerJobs;
-			// 		var custLevel = data.customerLevels;
-			// 		//绑定来源
-			// 		var opt ,opt1,opt2;
-			// 		for (var i = 0;i < cusForm.length;i++){
-			// 			opt = opt + "<option value="+cusForm[i].dictId+">"+cusForm[i].dictItemName+"</option>";
-			// 		}
-			// 		for (var i = 0;i < cusIndustry.length;i++){
-			// 			opt1 = opt1 + "<option value="+cusIndustry[i].dictId+">"+cusIndustry[i].dictItemName+"</option>";
-			// 		}
-			// 		for (var i = 0;i < custLevel.length;i++){
-			// 			opt2 = opt2 + "<option value="+custLevel[i].dictId+">"+custLevel[i].dictItemName+"</option>";
-			// 		}
-			// 		$("#edit_customerFrom").append(opt);
-			// 		$("#edit_custIndustry").append(opt1);
-			// 		$("#edit_custLevel").append(opt2);
-			// 		$("#edit_customerFrom").val(customer.custSource)
-			// 		$("#edit_custIndustry").val(customer.custIndustry)
-			// 		$("#edit_custLevel").val(customer.custLevel)
-			// 	}
-			// });
 			$.ajax({
 				url:"/customer/indexInsert/",
 				type: "POST",
@@ -689,16 +656,22 @@
 				}
 			})
 		}
-		// function next(pageNum) {
-		// 	$.ajax({
-		// 		url:"/customer/index.do",
-		// 		data:{"pageNum":pageNum},
-		// 		type:"post",
-		// 		success:function (data) {
-		// 			// window.location.reload();
-		// 		}
-		// 	})
-		// }
+		function selectCustomerByOther() {
+			var custName = $("#customerName").val();
+			var custSource = $("#customerFrom").val();
+			var custIndustry = $("#custIndustry").val();
+			var custLevel = $("#custLevel").val();
+			$.ajax({
+				url:"/customer/index2/{pageNum}",
+				type:"GET",
+				dataType:$('json'),
+				data:$('#selectForm').serialize(),
+				success:function (data) {
+					alert(data.msg);
+					window.location.reload();
+				}
+			})
+		}
 	</script>
 
 </body>

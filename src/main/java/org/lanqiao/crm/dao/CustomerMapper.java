@@ -1,5 +1,6 @@
 package org.lanqiao.crm.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.lanqiao.crm.pojo.Customer;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface CustomerMapper {
 
     List<Customer> selectAll();
 
-//    List<Customer> selectByOthers(Map<String, String> map);
+    List<Customer> selectByOthers(Customer customer);
 }

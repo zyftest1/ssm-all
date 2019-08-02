@@ -21,5 +21,5 @@ public interface ICustomerService {
 
     int insertCustomer(Customer customer);
 
-//    List<Customer> getCusetomerByOthers(Map<String,String> map);
+    List<Customer> getCusetomerByOthers(Customer customer);
 }

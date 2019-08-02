@@ -22,7 +22,8 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public List<Customer> getAll() {
-         return customerMapper.selectAll();
+//        System.out.println(customerMapper.selectAll());
+        return customerMapper.selectAll();
     }
 
     @Override
@@ -40,9 +41,10 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerMapper.insertSelective(customer);
     }
 
-//    @Override
-//    public List<Customer> getCusetomerByOthers(Map<String, String> map) {
-//        System.out.println("==="+customerMapper.selectByOthers(map));
-//        return customerMapper.selectByOthers(map);
-//    }
+    @Override
+    public List<Customer> getCusetomerByOthers(Customer customer) {
+        System.out.println(customerMapper.selectByOthers(customer));
+        return customerMapper.selectByOthers(customer);
+    }
+
 }
